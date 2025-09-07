@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: my_project           # 👈 dataset ใน BigQuery
+    schema: my_project
+    database: warm-helix-412914     # 👈 GCP project ID
+    tables:
+      - name: weather_today_data      # 👈 ชื่อ table จริงใน BigQuery

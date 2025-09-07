@@ -1,0 +1,14 @@
+dbt_project: # same with profile in dbt_project.yml
+
+  target: dev
+
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: warm-helix-412914 # project in GCP
+      dataset: my_project # dataset in Bigquery
+      threads: 4
+      keyfile: ../credentials/service_accounts_bq.json # credential service account
+      location: asia-southeast1 # location in dataset setting
+      timeout_seconds: 300

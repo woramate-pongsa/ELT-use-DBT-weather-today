@@ -1,0 +1,94 @@
+[0m17:30:38.115525 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A01DC37150>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A01DC29590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A01DC7BCD0>]}
+
+
+============================== 17:30:38.376931 | c048b72b-98e7-42c6-b247-bdc825b6fd38 ==============================
+[0m17:30:38.376931 [info ] [MainThread]: Running with dbt=1.10.11
+[0m17:30:38.378933 [debug] [MainThread]: running dbt with arguments {'partial_parse': 'True', 'write_json': 'True', 'send_anonymous_usage_stats': 'True', 'version_check': 'True', 'cache_selected_only': 'False', 'target_path': 'None', 'use_colors': 'True', 'invocation_command': 'dbt init', 'log_format': 'default', 'warn_error': 'None', 'introspect': 'True', 'debug': 'False', 'printer_width': '80', 'fail_fast': 'False', 'no_print': 'None', 'quiet': 'False', 'use_experimental_parser': 'False', 'log_cache_events': 'False', 'empty': 'None', 'log_path': 'logs', 'indirect_selection': 'eager', 'profiles_dir': 'C:\\Users\\USER\\.dbt', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True'}
+[0m17:30:39.106853 [info ] [MainThread]: Creating dbt configuration folder at C:\Users\USER\.dbt
+[0m17:30:53.824911 [debug] [MainThread]: Starter project path: C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\include\starter_project
+[0m17:30:53.927911 [info ] [MainThread]: 
+Your new dbt project "dbt_model" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m17:30:53.929912 [info ] [MainThread]: Setting up your profile.
+[0m17:31:32.425418 [error] [MainThread]: Encountered an error:
+
+[0m17:31:32.455417 [error] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\cli\requires.py", line 178, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\cli\requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\cli\main.py", line 483, in init
+    results = task.run()
+              ^^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\task\init.py", line 346, in run
+    self.setup_profile(profile_name)
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\task\init.py", line 262, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\task\init.py", line 172, in create_profile_from_target
+    load_plugin(adapter)
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\adapters\factory.py", line 239, in load_plugin
+    return FACTORY.load_plugin(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\adapters\factory.py", line 68, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\adapters\bigquery\__init__.py", line 4, in <module>
+    from dbt.adapters.bigquery.impl import BigQueryAdapter, GrantTarget, PartitionConfig
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\adapters\bigquery\impl.py", line 67, in <module>
+    from dbt.adapters.bigquery.python_submissions import (
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\dbt\adapters\bigquery\python_submissions.py", line 26, in <module>
+    from google.cloud.aiplatform import gapic as aiplatform_gapic
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform\__init__.py", line 24, in <module>
+    from google.cloud.aiplatform import initializer
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform\initializer.py", line 35, in <module>
+    from google.cloud.aiplatform import compat
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform\compat\__init__.py", line 18, in <module>
+    from google.cloud.aiplatform.compat import services
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform\compat\services\__init__.py", line 18, in <module>
+    from google.cloud.aiplatform_v1beta1.services.dataset_service import (
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform_v1beta1\__init__.py", line 21, in <module>
+    from .services.dataset_service import DatasetServiceClient
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform_v1beta1\services\dataset_service\__init__.py", line 16, in <module>
+    from .client import DatasetServiceClient
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform_v1beta1\services\dataset_service\client.py", line 66, in <module>
+    from google.cloud.aiplatform_v1beta1.services.dataset_service import pagers
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform_v1beta1\services\dataset_service\pagers.py", line 40, in <module>
+    from google.cloud.aiplatform_v1beta1.types import annotation
+  File "C:\Users\USER\AppData\Local\pypoetry\Cache\virtualenvs\etl-project1-MNK-A2R3-py3.11\Lib\site-packages\google\cloud\aiplatform_v1beta1\types\__init__.py", line 754, in <module>
+    from .llm_utility_service import (
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1130, in get_data
+KeyboardInterrupt
+
+[0m17:31:32.488419 [debug] [MainThread]: Command `dbt init` failed at 17:31:32.488419 after 54.63 seconds
+[0m17:31:32.489421 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A01DC93F90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A01DC93C10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A01DC90190>]}
+[0m17:31:32.494421 [debug] [MainThread]: Flushing usage events
+[0m17:31:33.686849 [debug] [MainThread]: An error was encountered while trying to flush usage events

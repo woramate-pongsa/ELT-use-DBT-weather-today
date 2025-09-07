@@ -1,0 +1,11 @@
+# Credentials
+credentials/*.json
+
+# Config
+.env
+config/.env
+config/env.yml
+
+# Python Artifacts & Caches
+__pycache__/
+*.pyc
