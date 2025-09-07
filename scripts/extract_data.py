@@ -65,12 +65,11 @@ def extract_weather_data(response):
 def load_to_gcs(df: pd.DataFrame) -> None:
     import json
     import pandas as pd
-    from io import StringIO
+    from io import BytesIO
     from datetime import datetime
     from google.cloud import storage
     from google.oauth2 import service_account
     from airflow.providers.google.cloud.hooks.gcs import GCSHook
-
 
     date = datetime.today().strftime("%Y-%m-%d")
     GCP_PROJECT_ID = os.environ.get("PROJECT_ID")
@@ -83,14 +82,14 @@ def load_to_gcs(df: pd.DataFrame) -> None:
     credentials_gcs = service_account.Credentials.from_service_account_info(service_account_info_gcs)
 
     # Connect to GCS
-    storage_client = storage.Client(
-        project=GCP_PROJECT_ID,
-        credentials=credentials_gcs,
-    )
-    bucket = storage_client.bucket(BUCKET_NAME)
+    # storage_client = storage.Client(
+    #     project=GCP_PROJECT_ID,
+    #     credentials=credentials_gcs,
+    # )
+    # bucket = storage_client.bucket(BUCKET_NAME)
 
-    csv_buffer = StringIO()
-    df.to_csv(csv_buffer, index=False)
+    parquet_buffer = BytesIO()
+    df.to_parquet(parquet_buffer, index=False, compression="snappy")
 
     # Destination to upload
     destination_blob_name = f"{BUSINESS_DOMAIN}/raw_data/{date}/{DATA_NAME}.csv"
@@ -102,20 +101,19 @@ def load_to_gcs(df: pd.DataFrame) -> None:
     hook.upload(
         bucket_name=BUCKET_NAME,
         object_name=destination_blob_name,
-        data=csv_buffer.getvalue()
+        data=parquet_buffer.getvalue()
     )
 
+# def extract_and_load():
+#     import logging
+#     import requests
 
-def extract_and_load():
-    import logging
-    import requests
+#     logging.basicConfig(level=logging.INFO)
+#     api_key = os.environ.get("API_KEY")
 
-    logging.basicConfig(level=logging.INFO)
-    api_key = os.environ.get("API_KEY")
+#     logging.info(f"Extracting data from {api_key}")
+#     response = requests.get(api_key)
+#     df = extract_weather_data(response)
 
-    logging.info(f"Extracting data from {api_key}")
-    response = requests.get(api_key)
-    df = extract_weather_data(response)
-
-    load_to_gcs(df)
-    logging.info("Load data to GCS complete")
+#     load_to_gcs(df)
+#     logging.info("Load data to GCS complete")
