@@ -6,6 +6,6 @@ SELECT
     latitude,
     longitude
 FROM 
-    {{ source(('my_project'), 'weather_today_data') }}
+    {{ source('weather_today','stg__weather_today') }}
 WHERE 
     date_time = '2025-08-07 07:00:00 UTC'

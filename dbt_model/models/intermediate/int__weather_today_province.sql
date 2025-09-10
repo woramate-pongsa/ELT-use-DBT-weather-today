@@ -10,7 +10,7 @@ SELECT
     ROUND(MIN(min_temperature), 2) AS min_temperature,
     ROUND(MAX(wind_speed), 2) AS max_wind_speed
 FROM 
-    {{ source(('my_project'), 'weather_today_data') }}
+    {{ source(('weather_today'), 'stg__weather_today') }}
 GROUP BY 
     province,
     station_name,

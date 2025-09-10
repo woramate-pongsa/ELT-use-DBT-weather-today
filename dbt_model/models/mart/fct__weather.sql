@@ -8,4 +8,4 @@ SELECT
     max_temperature,
     max_wind_speed
 FROM 
-    {{ ref('int__weather_today_province') }}
+    {{ source('weather_today', 'stg__weather_today') }}

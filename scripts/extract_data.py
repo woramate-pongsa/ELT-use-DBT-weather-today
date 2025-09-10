@@ -92,12 +92,12 @@ def load_to_gcs(df: pd.DataFrame) -> None:
     df.to_parquet(parquet_buffer, index=False, compression="snappy")
 
     # Destination to upload
-    destination_blob_name = f"{BUSINESS_DOMAIN}/raw_data/{date}/{DATA_NAME}.csv"
+    destination_blob_name = f"{BUSINESS_DOMAIN}/raw_data/{date}/{DATA_NAME}.parquet"
 
     # blob = bucket.blob(destination_blob_name)
     # blob.upload_from_string(csv_buffer.getvalue(), content_type="text/csv")
 
-    hook = GCSHook(gcp_conn_id="google_cloud_default")
+    hook = GCSHook(gcp_conn_id="google_gcs_default")
     hook.upload(
         bucket_name=BUCKET_NAME,
         object_name=destination_blob_name,

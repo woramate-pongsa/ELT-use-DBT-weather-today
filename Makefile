@@ -2,6 +2,9 @@ build:
 	docker compose build
 
 up:
+	docker compose up
+
+bd:
 	docker compose up -d --build
 
 stop:

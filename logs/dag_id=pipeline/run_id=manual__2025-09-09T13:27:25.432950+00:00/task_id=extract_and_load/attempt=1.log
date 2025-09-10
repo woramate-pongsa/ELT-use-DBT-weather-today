@@ -1,0 +1,8 @@
+{"timestamp":"2025-09-09T13:27:26.534419","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager"}
+{"timestamp":"2025-09-09T13:27:26.535195","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/etl_pipeline.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-09T13:27:27.812673","level":"info","event":"Extracting data from https://data.tmd.go.th/api/WeatherToday/V2/?uid=api&ukey=api12345","logger":"root"}
+{"timestamp":"2025-09-09T13:27:44.133149","level":"warning","event":"Using Connection.get_connection_from_secrets from `airflow.models` is deprecated.Please use `from airflow.sdk import Connection` instead","category":"DeprecationWarning","filename":"/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py","lineno":471,"logger":"py.warnings"}
+{"timestamp":"2025-09-09T13:27:44.178619","level":"info","event":"Connection Retrieved 'google_gcs_default'","logger":"airflow.hooks.base"}
+{"timestamp":"2025-09-09T13:27:44.997465","level":"info","event":"Data stream uploaded to weather_today_data/raw_data/2025-09-09/2025-09-09_weather_today.parquet in lake_project bucket","logger":"airflow.task.hooks.airflow.providers.google.cloud.hooks.gcs.GCSHook"}
+{"timestamp":"2025-09-09T13:27:45.623803","level":"info","event":"Load data to GCS complete","logger":"root"}
+{"timestamp":"2025-09-09T13:27:45.626769","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.decorators.python._PythonDecoratedOperator"}
