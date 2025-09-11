@@ -1,0 +1,10 @@
+{"timestamp":"2025-09-11T03:55:45.229478","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager"}
+{"timestamp":"2025-09-11T03:55:45.230110","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/etl_pipeline.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-11T03:55:48.765825","level":"warning","event":"Using Variable.get from `airflow.models` is deprecated.Please use `from airflow.sdk import Variable` instead","category":"DeprecationWarning","filename":"/home/airflow/.local/lib/python3.12/site-packages/airflow/models/variable.py","lineno":147,"logger":"py.warnings"}
+{"timestamp":"2025-09-11T03:55:48.826971","level":"info","event":"Start loading data to BigQuery","logger":"root"}
+{"timestamp":"2025-09-11T03:55:48.830181","level":"warning","event":"Using Connection.get_connection_from_secrets from `airflow.models` is deprecated.Please use `from airflow.sdk import Connection` instead","category":"DeprecationWarning","filename":"/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py","lineno":471,"logger":"py.warnings"}
+{"timestamp":"2025-09-11T03:55:48.869896","level":"info","event":"Connection Retrieved 'google_bq_default'","logger":"airflow.hooks.base"}
+{"timestamp":"2025-09-11T03:55:49.368134","level":"info","event":"Defining table schema","logger":"root"}
+{"timestamp":"2025-09-11T03:55:51.465144","level":"info","event":"Loaded 512 rows and 9 columns to warm-helix-412914.weather_today.raw","logger":"root"}
+{"timestamp":"2025-09-11T03:55:51.465330","level":"info","event":"Load data to BigQuery complete","logger":"root"}
+{"timestamp":"2025-09-11T03:55:51.466016","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.decorators.python._PythonDecoratedOperator"}

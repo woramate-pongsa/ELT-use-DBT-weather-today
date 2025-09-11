@@ -59,6 +59,14 @@ def extract_weather_data(response):
         "min_temperature": min_temperature,
         "wind_speed": wind_speed
     })
+    df["latitude"] = pd.to_numeric(df["latitude"], errors="coerce")
+    df["longitude"] = pd.to_numeric(df["longitude"], errors="coerce")
+    df["temperature"] = pd.to_numeric(df["temperature"], errors="coerce")
+    df["max_temperature"] = pd.to_numeric(df["max_temperature"], errors="coerce")
+    df["min_temperature"] = pd.to_numeric(df["min_temperature"], errors="coerce")
+    df["wind_speed"] = pd.to_numeric(df["wind_speed"], errors="coerce")
+    df["date_time"] = pd.to_datetime(df["date_time"], errors="coerce")
+    df["date_time"] = df["date_time"].astype("datetime64[us]")
 
     return df
 
@@ -81,21 +89,11 @@ def load_to_gcs(df: pd.DataFrame) -> None:
     service_account_info_gcs = json.load(open(KEYFILE_GCS))
     credentials_gcs = service_account.Credentials.from_service_account_info(service_account_info_gcs)
 
-    # Connect to GCS
-    # storage_client = storage.Client(
-    #     project=GCP_PROJECT_ID,
-    #     credentials=credentials_gcs,
-    # )
-    # bucket = storage_client.bucket(BUCKET_NAME)
-
     parquet_buffer = BytesIO()
     df.to_parquet(parquet_buffer, index=False, compression="snappy")
 
     # Destination to upload
     destination_blob_name = f"{BUSINESS_DOMAIN}/raw_data/{date}/{DATA_NAME}.parquet"
-
-    # blob = bucket.blob(destination_blob_name)
-    # blob.upload_from_string(csv_buffer.getvalue(), content_type="text/csv")
 
     hook = GCSHook(gcp_conn_id="google_gcs_default")
     hook.upload(
@@ -103,17 +101,3 @@ def load_to_gcs(df: pd.DataFrame) -> None:
         object_name=destination_blob_name,
         data=parquet_buffer.getvalue()
     )
-
-# def extract_and_load():
-#     import logging
-#     import requests
-
-#     logging.basicConfig(level=logging.INFO)
-#     api_key = os.environ.get("API_KEY")
-
-#     logging.info(f"Extracting data from {api_key}")
-#     response = requests.get(api_key)
-#     df = extract_weather_data(response)
-
-#     load_to_gcs(df)
-#     logging.info("Load data to GCS complete")

@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from datetime import datetime, timedelta
 from scripts.extract_data import extract_weather_data, load_to_gcs
-from scripts.load_data import bigquery_client, table_exists, bigquery_schema, load_to_bq
+from scripts.load_data import bigquery_client, table_exists, bigquery_schema
 
 from airflow import DAG
 from airflow.decorators import dag, task
@@ -45,28 +45,38 @@ def pipeline():
     @task(task_id="load_gcs_to_bq")
     def task_load_gcs_to_bq():
         import logging
-        from airflow.modules import Variable
+        from datetime import datetime
+        from airflow.models import Variable
+        date = datetime.today().strftime("%Y-%m-%d")
 
         logging.basicConfig(level=logging.INFO)
         BUCKET_NAME = Variable.get("gcs_bucket")
         BUSINESS_DOMAIN = Variable.get("business_domain")
+        GCP_PROJECT_ID = Variable.get("gcp_project_id")
         DATASET = Variable.get("bq_dataset")
-        RAW_TABLE = Variable.get("bq_table_raw")
+        TABLE = Variable.get("bq_table")
 
-        table_id = f"warm-helix-412914.{DATASET}.{RAW_TABLE}"
-        source_gcs = f"gs://{BUCKET_NAME}/{BUSINESS_DOMAIN}/raw_data/{{ ds }}/*.parquet"
+        source_gcs = f"gs://{BUCKET_NAME}/{BUSINESS_DOMAIN}/raw_data/{date}/*.parquet"
+        table_id = f"{GCP_PROJECT_ID}.{DATASET}.{TABLE}"
 
         logging.info("Start loading data to BigQuery")
         client = bigquery_client()
         write_disposition = table_exists(client, table_id)
 
-        logging.info("Defining Schema")
+        logging.info("Defining table schema")
         job_config = bigquery_schema(write_disposition)
 
-        load_to_bq(job_config, source_gcs, table_id)
-        logging.info("Loading data to Bigquery complete")
+        job = client.load_table_from_uri(
+            source_gcs,
+            table_id,
+            job_config=job_config,
+            location="asia-southeast1",
+        )
+        job.result()
 
-
+        table = client.get_table(table_id)
+        logging.info(f"Loaded {table.num_rows} rows and {len(table.schema)} columns to {table_id}")
+        logging.info("Load data to BigQuery complete")
 
     task_dbt_data_model = BashOperator(
         task_id="dbt_data_model",

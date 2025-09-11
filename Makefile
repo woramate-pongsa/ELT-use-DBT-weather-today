@@ -4,7 +4,7 @@ build:
 up:
 	docker compose up
 
-bd:
+build up:
 	docker compose up -d --build
 
 stop:
